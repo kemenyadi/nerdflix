@@ -122,6 +122,10 @@
 }
 
 .Card-overlay-text {
+  background-color: #000000e0;
+  padding: 55px;
+  padding-top: 25px;
+  padding-bottom: 25px;
   color: white;
   font-size: 20px;
   position: absolute;
