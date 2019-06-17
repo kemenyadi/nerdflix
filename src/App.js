@@ -1,6 +1,9 @@
 import React from "react";
+
 import "./App.css";
 import { logo, star } from "./constants";
+import data from "./imdb-top-50.json";
+import Dashboard from "./components/Dashboard";
 
 class App extends React.Component {
   constructor(props) {
@@ -30,6 +33,7 @@ class App extends React.Component {
           {logo}
           <div>{star}</div>
         </header>
+
         <div className="body">
           <h1>Movies</h1>
           <div className="subBody">
@@ -58,6 +62,10 @@ class App extends React.Component {
               <option value="4">⭐⭐⭐⭐</option>
               <option value="5">⭐⭐⭐⭐⭐</option>
             </select>
+          </div>
+
+          <div className="dashboard">
+            <Dashboard data={data} searchField={this.state.searchField} />
           </div>
         </div>
       </div>
