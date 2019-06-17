@@ -8,7 +8,7 @@ import Dashboard from "./components/Dashboard";
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { sortByTitle: "A-Z", sortByRating: null };
+    this.state = { sortByTitle: null, sortByRating: null };
     this.handleChangeField = this.handleChangeField.bind(this);
   }
 
@@ -65,7 +65,12 @@ class App extends React.Component {
           </div>
 
           <div className="dashboard">
-            <Dashboard data={data} searchField={this.state.searchField} />
+            <Dashboard
+              data={data}
+              searchField={this.state.searchField}
+              sortByTitle={this.state.sortByTitle}
+              sortByRating={this.state.sortByRating}
+            />
           </div>
         </div>
       </div>

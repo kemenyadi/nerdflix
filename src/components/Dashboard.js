@@ -13,12 +13,35 @@ class Dashboard extends React.Component {
   processJSON() {
     let searchMatchREGEX = new RegExp(this.props.searchField, "i"),
       matches = [];
-    _.forEach(this.props.data.data.movies, (value, key) => {
-      if (value.title.search(searchMatchREGEX) === -1) {
+    //SEARCH FILTER
+    _.forEach(this.props.data.data.movies, (movie, key) => {
+      if (movie.title.search(searchMatchREGEX) === -1) {
       } else {
-        matches.push(value);
+        matches.push(movie);
       }
     });
+    //ALPHABETICAL SORT
+    if (this.props.sortByTitle) {
+      let temp = matches;
+      temp.sort((a, b) => a.title.localeCompare(b.title));
+      if (this.props.sortByTitle === "A-Z") {
+        matches = temp;
+      } else if (this.props.sortByTitle === "Z-A") {
+        matches = temp.reverse();
+      }
+    }
+    //RATING SORT
+    if (this.props.sortByRating) {
+      let temp = [];
+      _.forEach(matches, (movie, key) => {
+        movie.ratingCustom = Math.round(movie.rating / 2); //imdb 10 point scale rating conversion to 5 star scale
+        if (movie.ratingCustom == this.props.sortByRating) {
+          temp.push(movie);
+        }
+      });
+      console.log(temp);
+      matches = temp;
+    }
     return matches;
   }
 
