@@ -11,15 +11,19 @@ class Dashboard extends React.Component {
   }
 
   processJSON() {
-    let searchMatchREGEX = new RegExp(this.props.searchField, "i"),
-      matches = [];
+    let matches = [];
     //SEARCH FILTER
-    _.forEach(this.props.data.data.movies, (movie, key) => {
-      if (movie.title.search(searchMatchREGEX) === -1) {
-      } else {
-        matches.push(movie);
-      }
-    });
+    if (this.props.searchField) {
+      let searchMatchREGEX = new RegExp(this.props.searchField, "i");
+      _.forEach(this.props.data.data.movies, (movie, key) => {
+        if (movie.title.search(searchMatchREGEX) === -1) {
+        } else {
+          matches.push(movie);
+        }
+      });
+    } else {
+      matches = this.props.data.data.movies;
+    }
     //ALPHABETICAL SORT
     if (this.props.sortByTitle) {
       let temp = matches;
@@ -39,7 +43,6 @@ class Dashboard extends React.Component {
           temp.push(movie);
         }
       });
-      console.log(temp);
       matches = temp;
     }
     return matches;

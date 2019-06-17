@@ -1,15 +1,71 @@
 .App {
-
+  color: white;
 }
 
 .App-header {
   padding: 10px;
   font-size: calc(10px + 2vmin);
   background-color: #282c34;
-  color: white;
 
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+}
+.App-header-left {
+  flex: 1 1 33%;
+  display: flex;
+  flex-direction: row;
+}
+.App-header-left div {
+  padding: 5px;
+}
+.App-header-logo {
+  display: flex;
+  flex: 1 1 33%;
+  justify-content: center;
+}
+.App-header-right {
+  display: flex;
+  justify-content: flex-end;
+  flex: 1 1 33%;
+}
+
+.Main {
+}
+
+.Dashboard-header {
+  background-color: #171717;
+}
+
+.Dashboard-header-filters {
+  background-color: #171717;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 30px;
+}
+.Dashboard-header-filters-sortby {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.Dashboard {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.inputField {
+  transform: translateY(15px);
+  background-color: #282c34;
+  color: white;
+}
+.Card {
+  padding: 15px;
+}
+.Card-img {
+  width: 182px;
+  height: 268px;
 }

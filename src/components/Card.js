@@ -7,10 +7,10 @@ class Card extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div className="Card">
+        <img className="Card-img" src={this.props.movie.urlPoster} />
+        <br />
         {this.props.movie.title}
-        <br/>
-        <img src={this.props.movie.urlPoster} />
       </div>
     );
   }
