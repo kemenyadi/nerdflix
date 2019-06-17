@@ -8,9 +8,10 @@ import Dashboard from "./components/Dashboard";
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { sortByTitle: null, sortByRating: null };
+    this.state = { sortByTitle: null, sortByRating: null, likedMovies: [] };
     this.handleChangeField = this.handleChangeField.bind(this);
     this.resetFilters = this.resetFilters.bind(this);
+    this.handleLike = this.handleLike.bind(this);
   }
 
   handleChangeField(event) {
@@ -26,9 +27,21 @@ class App extends React.Component {
   resetFilters() {
     this.setState({
       searchField: "",
-      sortByTitle: null,
-      sortByRating: null
+      sortByTitle: "",
+      sortByRating: ""
     });
+  }
+
+  handleLike(movieID) {
+    if (!this.state.likedMovies.includes(movieID)) {
+      this.setState({
+        likedMovies: this.state.likedMovies.concat([movieID])
+      });
+    } else {
+      this.setState({
+        likedMovies: this.state.likedMovies.filter(movie => movie !== movieID)
+      });
+    }
   }
 
   render() {
@@ -36,29 +49,33 @@ class App extends React.Component {
       <div className="App">
         <div className="App-header">
           <div className="App-header-left">
-            <div>Home</div>
+            <div className="padding-left-unset">Home</div>
             <div>Series</div>
-            <div>Movies</div>
+            <div className="App-header-left-active">Movies</div>
           </div>
           <div className="App-header-logo">{logo}</div>
-          <div className="App-header-right">{star}</div>
+          <div className="App-header-right">
+            <div className="star">{star}</div>
+            {this.state.likedMovies.length}
+          </div>
         </div>
 
         <div className="Main">
           <div className="Dashboard-header">
-            <center>Movies</center>
+            <h1 className="Dashboard-header-title">Movies</h1>
             <div className="Dashboard-header-filters">
               <input
                 className="inputField"
                 type="text"
                 name="searchField"
                 value={this.state.searchField}
-                placeholder={"Search"}
+                placeholder="Search for titles"
                 onChange={this.handleChangeField}
               />
               <div className="Dashboard-header-filters-sortby">
                 Sort By:
                 <select
+                  value={this.state.sortByTitle}
                   className="inputField"
                   name="sortByTitle"
                   onChange={this.handleChangeField}
@@ -73,6 +90,7 @@ class App extends React.Component {
                   className="inputField"
                   name="sortByRating"
                   onChange={this.handleChangeField}
+                  value={this.state.sortByRating}
                 >
                   <option value="" disabled selected>
                     Rating
@@ -92,6 +110,8 @@ class App extends React.Component {
 
           <div className="Dashboard">
             <Dashboard
+              likedMovies={this.state.likedMovies}
+              onLike={this.handleLike}
               data={data}
               searchField={this.state.searchField}
               sortByTitle={this.state.sortByTitle}

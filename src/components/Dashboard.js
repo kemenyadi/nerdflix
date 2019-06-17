@@ -25,13 +25,14 @@ class Dashboard extends React.Component {
       matches = this.props.data.data.movies;
     }
     //ALPHABETICAL SORT
+    console.log(this.props.sortByTitle);
     if (this.props.sortByTitle) {
-      let temp = matches;
+      let temp = matches.slice(); //non mutating copy
       temp.sort((a, b) => a.title.localeCompare(b.title));
       if (this.props.sortByTitle === "A-Z") {
         matches = temp;
       } else if (this.props.sortByTitle === "Z-A") {
-        matches = temp.reverse();
+        matches = temp.reverse(); //mutating
       }
     }
     //RATING SORT
@@ -51,7 +52,7 @@ class Dashboard extends React.Component {
   render() {
     let cards = [];
     _.forEach(this.processJSON(), (value, key) => {
-      cards.push(<Card key={key} movie={value} />);
+      cards.push(<Card onLike={this.props.onLike} key={key} movie={value} />);
     });
 
     return cards;

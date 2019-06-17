@@ -7,7 +7,10 @@ class Card extends React.Component {
   }
   render() {
     return (
-      <div className="Card">
+      <div
+        onClick={() => this.props.onLike(this.props.movie.idIMDB)}
+        className="Card"
+      >
         <img className="Card-img" src={this.props.movie.urlPoster} />
         <br />
         {this.props.movie.title}
